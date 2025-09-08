@@ -13,7 +13,10 @@ export const config = {
     password: process.env.REDIS_PASSWORD,
   },
   cache: {
-    ttl: process.env.CACHE_TTL_SECONDS || 3600, //1 hour
-    updateDays: process.env.UPDATE_DATA_DAYS || 7,
+    ttl: Number(process.env.CACHE_TTL_SECONDS), //5 minutes
+    updateDays: Number(process.env.DB_DATA_VALIDITY),
   },
+  razorpay:{
+    api:process.env.RAZORPAY_BASE_URL
+  }
 };

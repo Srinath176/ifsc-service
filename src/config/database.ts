@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { config } from "./env";
 
-export const connectDatabase = async (): Promise<void> => {
+const connectDatabase = async (): Promise<void> => {
   try {
     await mongoose.connect(config.mongoDb.uri!);
     console.log("MongoDB connected successfully");
@@ -18,3 +18,5 @@ mongoose.connection.on("disconnected", () => {
 mongoose.connection.on("error", (error) => {
   console.error("MongoDB error:", error);
 });
+
+export default connectDatabase;
