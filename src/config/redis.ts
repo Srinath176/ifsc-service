@@ -28,15 +28,6 @@ class RedisClient {
     return this.client;
   }
 
-  async connectRedis() {
-    try {
-      await this.client.connect();
-      console.log("Redis Connected Succesfully");
-    } catch (error) {
-      console.error("Redis connection error:", error);
-    }
-  }
-
   async disconnect(): Promise<void> {
     await this.client.quit();
   }
