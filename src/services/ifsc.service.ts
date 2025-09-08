@@ -5,16 +5,29 @@ import { IFSCDetails, APIResponse } from "../types/ifsc.type";
 import { CONSTANTS } from "../utils/api-constants";
 import { config } from "../config/env";
 
+/**
+ * Service layer responsible for IFSC logic:
+ * - Checks Redis cache
+ * - Falls back to MongoDB
+ * - Fetches from external API if needed(currently razorpay)
+ */
 export class IFSCService {
   private externalAPIService: ExternalAPIService;
   private validityDays: number;
-  private cacheTTL:  number;
+  private cacheTTL: number;
 
   constructor() {
     this.externalAPIService = ExternalAPIService.getInstance();
     this.validityDays = config.cache.updateDays;
-    this.cacheTTL = config.cache.ttl
+    this.cacheTTL = config.cache.ttl;
   }
+
+  /**
+   * Fetch IFSC details for a given code.
+   *
+   * @param code - IFSC code (e.g., HDFC0CAGSBK)
+   * @returns IFSC details object with metadata (source: cache/db/external)
+   */
 
   async getIFSCDetails(ifscCode: string): Promise<APIResponse<IFSCDetails>> {
     try {
@@ -94,7 +107,9 @@ export class IFSCService {
   ): Promise<void> {
     try {
       const cacheKey = `${CONSTANTS.CACHE_PREFIX}${ifscCode}`;
-      await redisClient.getClient().setex(cacheKey, this.cacheTTL, JSON.stringify(data));
+      await redisClient
+        .getClient()
+        .setex(cacheKey, this.cacheTTL, JSON.stringify(data));
     } catch (error) {
       console.error("Redis set error:", error);
     }

@@ -1,6 +1,10 @@
 import Redis from "ioredis";
 import { config } from "./env";
 
+/**
+ * Singleton Redis client wrapper.
+ * Handles connection, retries, and exposes a single shared client.
+ */
 class RedisClient {
   private client: Redis;
 
@@ -24,10 +28,16 @@ class RedisClient {
     });
   }
 
+  /**
+   * Returns the Redis client instance for performing operations.
+   */
   getClient(): Redis {
     return this.client;
   }
 
+  /**
+   * Gracefully disconnects the Redis client.
+   */
   async disconnect(): Promise<void> {
     await this.client.quit();
   }

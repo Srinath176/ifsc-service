@@ -28,6 +28,9 @@ app.get("/", (req, res) => {
   });
 });
 
+/**
+ * Base route for IFSC API.
+ */
 app.use("/api/ifsc", ifscRoutes);
 
 // Error handling

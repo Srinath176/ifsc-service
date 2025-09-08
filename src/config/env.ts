@@ -2,6 +2,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+/**
+ * Centralized configuration loader.
+ * Reads environment variables and normalizes them into a typed config object.
+ */
 export const config = {
   port: process.env.PORT || 9000,
   mongoDb: {
@@ -16,7 +20,7 @@ export const config = {
     ttl: Number(process.env.CACHE_TTL_SECONDS), //5 minutes
     updateDays: Number(process.env.DB_DATA_VALIDITY),
   },
-  razorpay:{
-    api:process.env.RAZORPAY_BASE_URL
-  }
+  razorpay: {
+    api: process.env.RAZORPAY_BASE_URL,
+  },
 };

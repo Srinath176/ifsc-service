@@ -1,6 +1,10 @@
-import mongoose, { Schema, Document } from 'mongoose';
-import { IFSCDocument } from '../types/ifsc.type';
+import mongoose, { Schema, Document } from "mongoose";
+import { IFSCDocument } from "../types/ifsc.type";
 
+/**
+ * MongoDB representation of an IFSC record.
+ * Stores bank details fetched from external APIs.
+ */
 interface IFSCModel extends IFSCDocument, Document {}
 
 const ifscSchema = new Schema<IFSCModel>(
@@ -10,59 +14,59 @@ const ifscSchema = new Schema<IFSCModel>(
       required: true,
       unique: true,
       uppercase: true,
-      index: true
+      index: true,
     },
     BANK: {
       type: String,
-      required: true
+      required: true,
     },
     BRANCH: {
       type: String,
-      required: true
+      required: true,
     },
     ADDRESS: {
       type: String,
-      required: true
+      required: true,
     },
     CITY: {
       type: String,
-      required: true
+      required: true,
     },
     DISTRICT: {
       type: String,
-      required: true
+      required: true,
     },
     STATE: {
       type: String,
-      required: true
+      required: true,
     },
     CONTACT: {
       type: String,
-      default: null
+      default: null,
     },
     IMPS: {
       type: Boolean,
-      default: false
+      default: false,
     },
     RTGS: {
       type: Boolean,
-      default: false
+      default: false,
     },
     NEFT: {
       type: Boolean,
-      default: false
+      default: false,
     },
     UPI: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
   }
 );
 
-const IFSCModel = mongoose.model<IFSCModel>('IFSC', ifscSchema);
+const IFSCModel = mongoose.model<IFSCModel>("IFSC", ifscSchema);
 
 export default IFSCModel;

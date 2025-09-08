@@ -2,12 +2,24 @@ import { Request, Response } from "express";
 import { IFSCService } from "../services/ifsc.service";
 import { HTTP_STATUS } from "../utils/api-constants";
 
+/**
+ * Controller responsible for handling IFSC-related HTTP requests.
+ */
 export class IFSCController {
   private ifscService: IFSCService;
 
   constructor() {
     this.ifscService = new IFSCService();
   }
+
+  /**
+   * GET /api/ifsc/:code
+   * Fetch IFSC details by code.
+   *
+   * @param req - Express Request object (expects `req.params.code`)
+   * @param res - Express Response object
+   * @returns JSON response containing IFSC details
+   */
 
   getIFSCDetails = async (req: Request, res: Response): Promise<void> => {
     try {
