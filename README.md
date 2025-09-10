@@ -108,6 +108,7 @@ GET http://localhost:port/api/ifsc/:code
 ```
 ## 🔮 Future Improvements
 
+- Add search by branch/city, swagger api, analytics and more.
 - Add support for multiple IFSC providers beyond Razorpay.
 - Implement request throttling & rate limiting.
 - Add Swagger/OpenAPI documentation.
